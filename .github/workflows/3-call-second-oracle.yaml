@@ -8,9 +8,11 @@ permissions:
   contents: write
   actions: write
   issues: write
+  models: read
 
 env:
   STEP_4_FILE: ".github/steps/4-bridge-synthesis.md"
+  DISPLAY_LANGUAGE: "pt-BR"
 
 jobs:
   find-workshop-issue:
@@ -87,7 +89,7 @@ jobs:
             const prompt = `A participant already consulted one oracle inside ${context.repo.owner}/${context.repo.repo}. ` +
               `You represent ${invocation.display}, the alternate viewpoint. ` +
               `In two concise paragraphs, contrast your perspective with the previous oracle and suggest how the participant ` +
-              `can combine both answers to improve their AI-driven continuous development workflow. Use friendly, practical language.`;
+              `can combine both answers to improve their AI-driven continuous development workflow. Use friendly, practical language. Answer in ${{ env.DISPLAY_LANGUAGE }}.`;
 
             const usedCommand = invocation.markers.find(marker => original.includes(marker)) ?? invocation.markers[0];
 
@@ -141,11 +143,11 @@ jobs:
         id: ai-response
         uses: actions/ai-inference@v1
         with:
-          model: ${{ steps.parse-command.outputs.model }}
           system-prompt: |
             You are the alternate bridge oracle.
             Emphasize synthesis and collaboration between multiple AI viewpoints.
           prompt: ${{ steps.parse-command.outputs.prompt }}
+          # model: ${{ steps.parse-command.outputs.model }}
 
       - name: Construir comentário do oráculo
         if: steps.parse-command.outputs.should-run == 'true'
