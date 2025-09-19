@@ -1,7 +1,7 @@
 {
   "name": "Universal Codespace",
   "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "postCreateCommand": ".devcontainer/post-create.sh",
+  "postCreateCommand": "echo alias setup=\\'./.devcontainer/post-create.sh\\' >> /home/vscode/.bashrc && .devcontainer/post-create.sh",
   "customizations": {
     "codespaces": {
       "openFiles": ["README.md"]
