@@ -8,7 +8,6 @@ permissions:
   contents: write
   actions: write
   issues: write
-  models: read
 
 env:
   STEP_3_FILE: ".github/steps/3-call-second-oracle.md"
@@ -48,7 +47,7 @@ jobs:
               {
                 tag: 'o3ceratops',
                 markers: ['/o3ceratops', '@o3ceratops'],
-                model: 'openai/gpt-4o',
+                model: 'openai/gpt-4.1',
                 display: 'GPT-4.1'
               },
               {
@@ -112,7 +111,11 @@ jobs:
         id: ai-response
         uses: actions/ai-inference@v1
         with:
-          prompt: 'Hello!'
+          system-prompt: |
+            You are the bridge oracle guiding a workshop participant through AI-driven continuous delivery practices.
+            Keep the tone motivational and clear.
+          prompt: ${{ steps.parse-command.outputs.prompt }}
+          # model: ${{ steps.parse-command.outputs.model }}
 
       - name: Construir comentário do oráculo
         env:
