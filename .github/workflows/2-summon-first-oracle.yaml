@@ -8,6 +8,7 @@ permissions:
   contents: write
   actions: write
   issues: write
+  models: read
 
 env:
   STEP_3_FILE: ".github/steps/3-call-second-oracle.md"
