@@ -47,7 +47,7 @@ jobs:
               {
                 tag: 'o3ceratops',
                 markers: ['/o3ceratops', '@o3ceratops'],
-                model: 'openai/gpt-4.1',
+                model: 'openai/gpt-4o',
                 display: 'GPT-4.1'
               },
               {
