@@ -12,9 +12,11 @@ permissions:
   contents: write
   actions: write
   issues: write
+  models: read
 
 env:
   STEP_5_FILE: ".github/steps/5-bridge-farewell.md"
+  DISPLAY_LANGUAGE: "pt-BR"
 
 jobs:
   find-workshop-issue:
@@ -62,7 +64,6 @@ jobs:
         id: ai-response
         uses: actions/ai-inference@v1
         with:
-          model: openai/gpt-4.1
           system-prompt: |
             You are GPT-4.1 performing as a storyteller for the Crossing The Bridge workshop.
             Adopt the voice and mannerisms of the specified character while remaining clear and encouraging.
@@ -76,7 +77,8 @@ jobs:
             Response tagged as GPT-4o:
             ${{ steps.gather.outputs.gpt4o }}
             ---
-            Craft a short narrative (up to three paragraphs) that compares the two viewpoints, highlights complementary ideas, and offers one actionable suggestion for what to do next in this repository.
+            Craft a short narrative (up to three paragraphs) that compares the two viewpoints, highlights complementary ideas, and offers one actionable suggestion for what to do next in this repository. Answer in ${{ env.DISPLAY_LANGUAGE }}.
+          # model: openai/gpt-4.1
 
       - name: Construir comentário do narrador
         env:
