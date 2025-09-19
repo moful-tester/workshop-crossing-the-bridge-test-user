@@ -111,10 +111,7 @@ jobs:
         id: ai-response
         uses: actions/ai-inference@v1
         with:
-          system-prompt: |
-            You are the bridge oracle guiding a workshop participant through AI-driven continuous delivery practices.
-            Keep the tone motivational and clear.
-          prompt: ${{ steps.parse-command.outputs.prompt }}
+          prompt: 'Hello!'
 
       - name: Construir comentário do oráculo
         env:
